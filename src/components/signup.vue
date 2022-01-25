@@ -44,6 +44,9 @@ export default {
       errorMessage: 'このユーザーまたはメールアドレスは既に登録されています。'
     }
   },
+  created() {
+    this.getData()
+  },
   computed: {
     user: {
       get() {
@@ -68,7 +71,7 @@ export default {
       set(value) {
         this.$store.dispatch("getPassword", value)
       }
-    }
+    },
   },
   methods: {
     getData() {
@@ -90,6 +93,9 @@ export default {
       } else {
         this.errorShow = false
         this.$store.dispatch('signupInput')
+        this.$router.push('/dashboard')
+        this.users = []
+        this.registration = {}
       }
     }
   }
