@@ -22,8 +22,6 @@
         <p>Copyright ©️2021 oo Inc. All rights reserved.</p>
       </div>
     </form>
-    {{registration.email}}
-    {{registration.password}}
   </div>
 </template>
 
@@ -86,12 +84,16 @@ export default {
     },
     login() {
       this.getData()
-      if(this.registration.email === this.email && this.registration.password === this.password) {
-        this.errorShow = false
-        this.$router.push('/dashboard')
-      } else {
+      if(this.registration.email !== this.email || this.registration.password !== this.password) {
         this.errorShow = true
+        this.users = []
+        this.registration = {}
+        return
       }
+      this.errorShow = false
+      this.$router.push('/dashboard')
+      this.users = []
+      this.registration = {}
     }
   }
 }
